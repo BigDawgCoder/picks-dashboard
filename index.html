@@ -1513,12 +1513,15 @@ function renderTodayTab() {
                 const strPills = (ai.strengths || []).map(s => `<span class="ai-pill str">${s}</span>`).join('');
                 const conPills = (ai.concerns || []).map(c => `<span class="ai-pill con">${c}</span>`).join('');
                 const confBadge = typeof ai.confidence === 'number' ? `<span style="font-size:11px;color:var(--text-muted);margin-left:8px">${ai.confidence}/100 confidence</span>` : '';
+                const publicLean = ai.public_lean ? `<div style="font-size:12px;color:var(--text-muted);margin-bottom:8px"><span style="color:var(--yellow);font-weight:600">📊 Public:</span> ${ai.public_lean}</div>` : '';
+                const personalTake = ai.personal_take ? `<div style="font-size:13px;line-height:1.6;margin-bottom:10px;padding:10px 12px;background:rgba(139,92,246,0.08);border-radius:6px;border-left:3px solid var(--purple)"><span style="color:var(--purple);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:4px">My Take</span>${ai.personal_take}</div>` : '';
                 aiHtml = `<div class="ai-section">
                     <div class="ai-header">
                         <div class="ai-grade ${gradeClass}">${ai.grade || '?'}</div>
                         <div><div class="ai-verdict">${ai.label || ai.gradeLabel || ''}${confBadge}</div><div class="ai-source">Claude's Independent Analysis</div></div>
                     </div>
                     <div class="ai-summary">${ai.summary}</div>
+                    ${publicLean}${personalTake}
                     <div class="ai-pills">${strPills}${conPills}</div>
                 </div>`;
             } else {
